@@ -7,24 +7,21 @@ const Renderer = function () {
     const renderPosts = function (postsArr) {
         $("#posts").empty();
         for (let post = 0; post < posts.length; post++) {
-            const postDiv = `<div class='post' data-id=${posts[post].id} class="posts" style=display:inline>${posts[post].text}</div>`
-            $("#posts").append($(postDiv))
+            let postDiv = $(`<div class='post' data-id=${posts[post].id}  >${posts[post].text}</div>`)
             const postButton = `<button class="delete" > Delete Post </button>`
-            $("#posts").append($(postButton))
-            $("#posts").append($("<br>"))
-            $("#posts").append($("<br>"))
+            postDiv.append($(postButton))
+
 
             for (let comment = 0; comment < posts[post].comments.length; comment++) {
-                const commentsDiv = `<div style=display:inline data-id=${posts[post].comments[comment].id} class =comments>${posts[post].comments[comment].text}</div>`
-                $("#posts").append($(commentsDiv))
+                const commentsP = $(`<div  data-id=${posts[post].comments[comment].id} class =comments>${posts[post].comments[comment].text}</div>`)
+                postDiv.append($(commentsP))
                 const comButton = `<button class="delete-comment" > X </button>`
-                $("#posts").append($(comButton))
-                $("#posts").append($("<br>"))
+                $(commentsP).append($(comButton))
             }
-            $("#posts").append($(`<input class='addtext'placeholder="Add comment">`))
-            $("#posts").append($(`<button class='add'>Add comment</button>`))
-            $("#posts").append($("<br>"))
-            $("#posts").append($("<br>"))
+            $(postDiv).append($(`<input class='addtext'placeholder="Add comment">`))
+            $(postDiv).append($(`<button class='add'>Add comment</button>`))
+            $("#posts").append($(postDiv))
+
         }
 
     }
